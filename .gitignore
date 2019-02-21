@@ -13,3 +13,7 @@
 
 #GoLand
 .idea
+
+#indexes & builds
+*.csv
+Sing.exe
