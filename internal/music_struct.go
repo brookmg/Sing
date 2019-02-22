@@ -33,9 +33,10 @@ func (s MusicFiles) Swap (i , j int) {
 }
 
 func (s MusicFiles) Search (q string) MusicFiles{
+	q = strings.ToLower(q)
 	returnable := MusicFiles{}
 	for i := range s {
-		if strings.Contains(s[i].Fname , q) || strings.Contains(s[i].Fpath , q) {
+		if strings.Contains(strings.ToLower(s[i].Fname) , q) || strings.Contains(strings.ToLower(s[i].Fpath) , q) {
 			returnable = append(returnable , s[i])
 		}
 	}
