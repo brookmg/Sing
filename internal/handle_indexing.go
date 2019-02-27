@@ -61,7 +61,7 @@ func GetMusicList(drives []string) MusicFiles {
 			log.Fatal(e)
 		}
 
-		if SliceContains(drives , string(strings.ToUpper(line[1])[0])) {
+		if SliceContains(drives , string(strings.ToUpper(line[1])[0])) && strings.HasSuffix(line[0] , ".mp3") {
 			musicFiles = append(musicFiles, MusicStruct{
 				Fname: line[0],
 				Fpath: line[1],
