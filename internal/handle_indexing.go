@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -80,6 +81,20 @@ func SliceContains (a []string , i string) bool {
 		}
 	}
 	return false
+}
+
+func removeCharactors (i string) string {
+	reg, err := regexp.Compile("[^a-zA-Z0-9]+")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	processed := reg.ReplaceAllString(i, "")
+	return processed
+}
+
+func splitBySpace (i string) []string {
+	return strings.Fields(i)
 }
 
 func FileExt (filename string) string {

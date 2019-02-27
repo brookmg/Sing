@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"../internal"
+	"fmt"
 	"github.com/spf13/cobra"
 	"log"
 	"math/rand"
@@ -13,9 +14,11 @@ import (
 var random bool
 var genre string
 var contain string
+var exact bool
 
 func init() {
 	playCmd.Flags().BoolVarP(&random, "random" , "r" , false , "Pick a random song from the indexed list")
+	playCmd.Flags().BoolVarP(&exact, "exact" , "e" , false , "Find the exact query that is asked. for 'Khalid - Saturday Night' -> 'Khalid - Saturday Night.mp3'")
 	playCmd.Flags().StringVarP(&genre , "genre" , "g" , "" , "Genre for the chosen music")
 	playCmd.Flags().StringVarP(&contain, "contain" , "c", "", "String that could be inside the name of the music")
 	rootCmd.AddCommand(playCmd)
@@ -30,7 +33,11 @@ var playCmd = &cobra.Command{
 		musicList := internal.GetMusicList(internal.AvailableFileSystems())
 		if random {
 			if contain != "" {
-				musicList = musicList.Search(contain)
+				if !exact {
+					musicList = musicList.Search(contain)
+				} else {
+					musicList = musicList.SearchStrict(contain)
+				}
 			}
 
 			if musicList.Len() > 0 {
@@ -48,6 +55,8 @@ var playCmd = &cobra.Command{
 			} else {
 				println("We couldn't find any music.")
 			}
+		} else {
+			fmt.Println("Non-random music selection is not implemented yet.")
 		}
 	},
 }
