@@ -44,7 +44,7 @@ func GetRefreshedMusicList(drives []string) MusicFiles {
 		return MusicFiles{}
 	case <-donec:
 		os.Remove("allMusicFiles.csv")
-		os.Rename("allMusicFiles.csv" , "allMusicFiles.csv")
+		os.Rename("allMusic.csv" , "allMusicFiles.csv")
 		return GetMusicList(drives)
 	}
 }
