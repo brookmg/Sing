@@ -28,7 +28,7 @@ var playCmd = &cobra.Command{
 	Use:   "play",
 	Short: "Command to play music",
 	Long:  `Command to play offline music on the device, might be random or with specific tag`,
-	TraverseChildren:true,
+	//TraverseChildren:true,
 	Run: func(cmd *cobra.Command, args []string) {
 		musicList := internal.GetMusicList(internal.AvailableFileSystems())
 		if random {
