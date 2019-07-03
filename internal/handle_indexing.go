@@ -29,7 +29,7 @@ func getDrives() (r []string) {
 
 func GetRefreshedMusicList(drives []string) MusicFiles {
 	// start
-	cmd := exec.Command("indexing.exe")
+	cmd := exec.Command("C:\\Users\\BrookMG\\Documents\\Github\\Sing\\indexing.exe")
 	if err := cmd.Start(); err != nil {
 		panic(err)
 	}
@@ -43,14 +43,14 @@ func GetRefreshedMusicList(drives []string) MusicFiles {
 	case <-time.After(25 * time.Second):
 		return MusicFiles{}
 	case <-donec:
-		os.Remove("allMusicFiles.csv")
-		os.Rename("allMusic.csv" , "allMusicFiles.csv")
+		os.Remove("C:\\Users\\BrookMG\\Documents\\Github\\Sing\\allMusicFiles.csv")
+		os.Rename("C:\\Users\\BrookMG\\Documents\\Github\\Sing\\allMusic.csv" , "C:\\Users\\BrookMG\\Documents\\Github\\Sing\\allMusicFiles.csv")
 		return GetMusicList(drives)
 	}
 }
 
 func GetMusicList(drives []string) MusicFiles {
-	csvFile, _ := os.Open("allMusicFiles.csv")
+	csvFile, _ := os.Open("C:\\Users\\BrookMG\\Documents\\Github\\Sing\\allMusicFiles.csv")
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 
 	var musicFiles MusicFiles
